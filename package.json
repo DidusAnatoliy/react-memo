@@ -21,7 +21,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "format": "prettier --write .",
+    "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "lint": "eslint ./src/**/**.jsx ./src/**/**.js"
   },
   "devDependencies": {
@@ -29,7 +29,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "lefthook": "^1.4.9",
-    "prettier": "^3.0.2"
+    "prettier": "^3.3.2"
   },
   "browserslist": {
     "production": [
