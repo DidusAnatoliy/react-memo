@@ -4,7 +4,7 @@ import { Button } from "../Button/Button";
 
 import deadImageUrl from "./images/dead.png";
 import celebrationImageUrl from "./images/celebration.png";
-import { useContext,useEffect,useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AddLeader, GetLeader } from "../../Api";
 import { EasyModeContext } from "../../utils/contextMode";

@@ -20,7 +20,9 @@ export function EasyModeProvider({ children }) {
   };
 
   return (
-    <EasyModeContext.Provider value={{ leaders, setLeaders, isLives, easyMode, toggleMode, setIsLives, level, setLevel }}>
+    <EasyModeContext.Provider
+      value={{ leaders, setLeaders, isLives, easyMode, toggleMode, setIsLives, level, setLevel }}
+    >
       {children}
     </EasyModeContext.Provider>
   );
