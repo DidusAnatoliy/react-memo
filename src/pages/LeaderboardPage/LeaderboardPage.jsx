@@ -37,7 +37,7 @@ const LeaderboardPage = () => {
           <thead>
             <tr className={styles.leaderboard}>
               <th>Позиция</th>
-              <th>Пользователь</th>
+              <th className={styles.userPosition}>Пользователь</th>
               <th>Время</th>
             </tr>
           </thead>
@@ -46,7 +46,7 @@ const LeaderboardPage = () => {
               return (
                 <tr className={styles.leaderboards} key={user.id}>
                   <th>#{index + 1}</th>
-                  <th>{user.name}</th>
+                  <th className={styles.userPosition}>{user.name}</th>
                   <th>{formatDate(user.time)}</th>
                 </tr>
               );

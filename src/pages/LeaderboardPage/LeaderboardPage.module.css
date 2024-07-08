@@ -40,12 +40,16 @@
     line-height: 133%;
     color: #999;
   }
+  .userPosition {
+    padding-right: 238px;
+  }
   .text {
     color: #ffffff;
     font-size: 24px;
-    font-family: Roboto;
+    font-family: sans-serif;
     font-style: normal;
   }
+ 
   .table {
     display: flex;
     gap: 10px;
