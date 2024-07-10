@@ -37,20 +37,20 @@ const LeaderboardPage = () => {
           <thead>
             <tr className={styles.leaderboard}>
               <th>Позиция</th>
-              <th className={styles.userPosition}>Пользователь</th>
+              <th>Пользователь</th>
+              <th>&nbsp;</th>
               <th>Время</th>
             </tr>
           </thead>
           <tbody className={styles.tbody}>
-            {leaders.slice(0, 10).map((user, index) => {
-              return (
-                <tr className={styles.leaderboards} key={user.id}>
-                  <th>#{index + 1}</th>
-                  <th className={styles.userPosition}>{user.name}</th>
-                  <th>{formatDate(user.time)}</th>
-                </tr>
-              );
-            })}
+            {leaders.slice(0, 10).map((user, index) => (
+              <tr className={styles.leaderboard} key={user.id}>
+                <td>#{index + 1}</td>
+                <td>{user.name}</td>
+                <td>&nbsp;</td>
+                <td>{formatDate(user.time)}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
         <div className={styles.linkButton}>
