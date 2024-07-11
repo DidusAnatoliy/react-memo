@@ -44,9 +44,9 @@
   flex-direction: column;
   justify-content: center;
   flex-shrink: 0;
-
   border-radius: 12px;
   background: #fff;
+  box-sizing: border-box;
 }
 
 .levelLink {
@@ -59,7 +59,10 @@
   line-height: 72px;
   text-decoration: none;
 }
-
+.level:hover {
+  border: 2px solid rgb(0, 183, 255);
+  
+}
 .levelLink:visited {
   color: #0080c1;
 }
@@ -114,4 +117,8 @@
   font-size: 22px;
   font-family: StratosSkyeng;
   font-style: normal;
+}
+
+.lableInput {
+  display: none;
 }
