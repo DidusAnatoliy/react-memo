@@ -7,7 +7,12 @@ import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
 import { EasyModeContext } from "../../utils/contextMode";
 import { Link } from "react-router-dom";
-import SuperPower from "../SuperPower/SuperPower";
+import eyes from "./images/eyes.png";
+import circle from "./images/circle.png";
+import car from "./images/car.png";
+import SuperPowerCards from "../SuperPower/SuperPowerCards";
+import SuperPowerEyes from "../SuperPower/SuperPowerEyes";
+
 
 // Игра закончилась
 const STATUS_LOST = "STATUS_LOST";
@@ -16,6 +21,8 @@ const STATUS_WON = "STATUS_WON";
 const STATUS_IN_PROGRESS = "STATUS_IN_PROGRESS";
 // Начало игры: игрок видит все карты в течении нескольких секунд
 const STATUS_PREVIEW = "STATUS_PREVIEW";
+// Игры ставится на паузу
+const STATUS_PAUSE = "STATUS_PAUSE";
 
 function getTimerValue(startDate, endDate) {
   if (!startDate && !endDate) {
@@ -45,7 +52,7 @@ function getTimerValue(startDate, endDate) {
  */
 export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
   // Легкий режим
-  const { easyMode, isLives, setIsLives } = useContext(EasyModeContext);
+  const { easyMode, isLives, setIsLives, setUseEyes, useEyes, useCard, setUseCard } = useContext(EasyModeContext);
 
   // В cards лежит игровое поле - массив карт и их состояние открыта\закрыта
   const [cards, setCards] = useState([]);
@@ -62,6 +69,21 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
     seconds: 0,
     minutes: 0,
   });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenCards, setIsModalOpenCards] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const openModalCards = () => {
+    setIsModalOpenCards(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const closeModalCards = () => {
+    setIsModalOpenCards(false);
+  };
   // Стейт для открытия только двух карт
   const [isBlockedOpen, seIsBlockedOpen] = useState(false);
 
@@ -88,13 +110,17 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
     setTimer(getTimerValue(startDate, null));
     setStatus(STATUS_IN_PROGRESS);
     ResetLives();
-  }, [ResetLives]);
+    setUseEyes(false);
+    setUseCard(false);
+  }, [setUseCard, ResetLives, setUseEyes]);
 
   function resetGame() {
     setGameStartDate(null);
     setGameEndDate(null);
     setTimer(getTimerValue(null, null));
     setStatus(STATUS_PREVIEW);
+    setUseEyes(false);
+    setUseCard(false);
   }
 
   /**
@@ -239,13 +265,68 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
 
   // Обновляем значение таймера в интервале
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setTimer(getTimerValue(gameStartDate, gameEndDate));
-    }, 300);
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [gameStartDate, gameEndDate]);
+    if (status !== STATUS_PAUSE) {
+      if (status === STATUS_LOST) return;
+      if (status === STATUS_WON) return;
+      const intervalId = setInterval(() => {
+        setTimer(prevTimer => {
+          if (prevTimer) {
+            const seconds = prevTimer.seconds === 59 ? 0 : prevTimer.seconds + 1;
+            const minutes = prevTimer.seconds === 59 ? prevTimer.minutes + 1 : prevTimer.minutes;
+            return { seconds, minutes };
+          }
+          return prevTimer;
+        });
+      }, 1000);
+      return () => {
+        clearInterval(intervalId);
+      };
+    }
+  }, [status, gameStartDate, gameEndDate]);
+
+  const habdleAchievementEyesClick = () => {
+    setStatus(STATUS_PAUSE);
+    setUseEyes(true);
+    setIsModalOpen(false);
+    // Сохраняем состояние открытых ранее игроком карт
+    const userOpenCards = cards.filter(card => card.open);
+    // Открываем остальные карты
+    const openCardsAll = cards.map(card => ({ ...card, open: true }));
+    setCards(openCardsAll);
+
+    setTimeout(() => {
+      // Восстанавливаем состояние открытых карт игроком
+      const closedUserCards = cards.map(card => {
+        if (userOpenCards.some(openCard => openCard.id === card.id)) {
+          return { ...card, open: true }; // Карты, открытые игроком, остаются открытыми
+        } else {
+          return { ...card, open: false }; // Остальные карты закрываются
+        }
+      });
+
+      setCards(closedUserCards);
+      // Обратно меняет состояние блокировки карт, чтобы можно было нажать на карты
+      seIsBlockedOpen(false);
+
+      setStatus(STATUS_IN_PROGRESS);
+    }, 5000); // Показываем карты на 5 секунд
+  };
+
+  const habdleAchievementCardClick = () => {
+    // создаем массив и фильтруем только те карты, которые не были открыты
+    const notOpenedCards = cards.filter(card => !card.open);
+    // выбираем случайную карту из массива, случайное число(0,1) умножается на длину массива и округляется
+    const randomCard = notOpenedCards[Math.floor(Math.random() * notOpenedCards.length)];
+    // создается новый массив, содержит те карты, что совпадают с масть и рангом выбранной случайной карты
+    const randomPair = notOpenedCards.filter(
+      sameCards => randomCard.suit === sameCards.suit && randomCard.rank === sameCards.rank,
+    );
+    //открывем эти две карты
+    randomPair[1].open = true;
+    randomPair[0].open = true;
+    // больше нельзя использовать алахамору
+    // setUseCard(true);
+  };
 
   return (
     <div className={styles.container}>
@@ -260,12 +341,12 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
             <>
               <div className={styles.timerValue}>
                 <div className={styles.timerDescription}>min</div>
-                <div>{timer.minutes.toString().padStart("2", "0")}</div>
+                <div>{timer.minutes !== undefined ? timer.minutes.toString().padStart("2", "0") : "00"}</div>
               </div>
               .
               <div className={styles.timerValue}>
                 <div className={styles.timerDescription}>sec</div>
-                <div>{timer.seconds.toString().padStart("2", "0")}</div>
+                <div>{timer.seconds !== undefined ? timer.seconds.toString().padStart("2", "0") : "00"}</div>
               </div>
             </>
           )}
@@ -279,7 +360,38 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
                 </p>
               </div>
             ) : null}
-            <SuperPower />
+            <div className={styles.superPowerWraper}>
+              <img
+                src={eyes}
+                alt="eyes"
+                onMouseEnter={openModal}
+                onMouseLeave={closeModal}
+                onClick={() => {
+                  if (!useEyes) {
+                    habdleAchievementEyesClick();
+                    setUseEyes(true);
+                  }
+                }}
+              />
+              {isModalOpen && <SuperPowerEyes onClose={closeModal} />}
+            </div>
+            <div className={styles.imageOverlay}>
+              <img src={circle} onMouseEnter={openModalCards} onMouseLeave={closeModalCards} alt="circle" />
+              <img
+                src={car}
+                onMouseEnter={openModalCards}
+                onMouseLeave={closeModalCards}
+                alt="cards"
+                className={styles.overlayImage}
+                onClick={() => {
+                  if (!useCard) {
+                    habdleAchievementCardClick();
+                    setUseCard(true);
+                  }
+                }}
+              />
+              {isModalOpenCards && <SuperPowerCards onClose={closeModal} />}
+            </div>
             <Button onClick={resetGame}>Начать заново</Button>{" "}
           </>
         ) : null}
