@@ -38,7 +38,7 @@ const LeaderboardPage = () => {
             <tr className={styles.leaderboard}>
               <th>Позиция</th>
               <th>Пользователь</th>
-              <th>Достижения</th>
+              <th>&nbsp;</th>
               <th>Время</th>
             </tr>
           </thead>
