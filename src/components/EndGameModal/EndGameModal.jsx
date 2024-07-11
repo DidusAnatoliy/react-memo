@@ -83,8 +83,8 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
         <Button onClick={handleClick}>Добавить</Button>
         <p className={styles.description}>Затраченное время:</p>
         <div className={styles.time}>
-        {gameDurationMinutes !== undefined ? gameDurationMinutes.toString().padStart("2", "0") : "00"}.
-        {gameDurationSeconds !== undefined ? gameDurationSeconds.toString().padStart("2", "0") : "00"}
+          {gameDurationMinutes !== undefined ? gameDurationMinutes.toString().padStart("2", "0") : "00"}.
+          {gameDurationSeconds !== undefined ? gameDurationSeconds.toString().padStart("2", "0") : "00"}
         </div>
         <Button onClick={onClick}>Начать сначала</Button>
         <Link to="/leaderboard">
@@ -101,8 +101,8 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
         <h2 className={styles.title}>{title}</h2>
         <p className={styles.description}>Затраченное время:</p>
         <div className={styles.time}>
-        {gameDurationMinutes !== undefined ? gameDurationMinutes.toString().padStart("2", "0") : "00"}.
-        {gameDurationSeconds !== undefined ? gameDurationSeconds.toString().padStart("2", "0") : "00"}
+          {gameDurationMinutes !== undefined ? gameDurationMinutes.toString().padStart("2", "0") : "00"}.
+          {gameDurationSeconds !== undefined ? gameDurationSeconds.toString().padStart("2", "0") : "00"}
         </div>
         <Button onClick={onClick}>Начать сначала</Button>
         <Link to="/">

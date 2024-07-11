@@ -27,24 +27,24 @@ export function EasyModeProvider({ children }) {
 
   return (
     <EasyModeContext.Provider
-    value={{
-      useCard,
-      setUseCard,
-      useEyes,
-      setUseEyes,
-      useAchievementPaz,
-      setUseAchievementPaz,
-      useAchievementCir,
-      setUseAchievementCir,
-      leaders,
-      setLeaders,
-      isLives,
-      easyMode,
-      toggleMode,
-      setIsLives,
-      level,
-      setLevel,
-    }}
+      value={{
+        useCard,
+        setUseCard,
+        useEyes,
+        setUseEyes,
+        useAchievementPaz,
+        setUseAchievementPaz,
+        useAchievementCir,
+        setUseAchievementCir,
+        leaders,
+        setLeaders,
+        isLives,
+        easyMode,
+        toggleMode,
+        setIsLives,
+        level,
+        setLevel,
+      }}
     >
       {children}
     </EasyModeContext.Provider>

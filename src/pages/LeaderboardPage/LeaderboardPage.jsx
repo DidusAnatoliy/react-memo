@@ -35,7 +35,7 @@ const LeaderboardPage = () => {
         </Link>
       </div>
       <div>
-      <div className={styles.table}>
+        <div className={styles.table}>
           <div>
             <div className={styles.leaderboard}>
               <p>Позиция</p>

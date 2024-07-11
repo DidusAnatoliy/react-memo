@@ -13,7 +13,6 @@ import car from "./images/car.png";
 import SuperPowerCards from "../SuperPower/SuperPowerCards";
 import SuperPowerEyes from "../SuperPower/SuperPowerEyes";
 
-
 // Игра закончилась
 const STATUS_LOST = "STATUS_LOST";
 const STATUS_WON = "STATUS_WON";
