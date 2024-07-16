@@ -326,7 +326,8 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
     // больше нельзя использовать алахамору
     // setUseCard(true);
   };
-
+  const [hasUsedEyes, setHasUsedEyes] = useState(false);
+  const [hasUsedCard, setHasUsedCard] = useState(false);
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -352,30 +353,32 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
         </div>
         {status === STATUS_IN_PROGRESS ? (
           <>
-            {easyMode === true ? (
+            {/* {easyMode === true ? (
               <div>
                 <p className={styles.easyMode}>
                   Осталось: <span>{isLives} жизни </span>
                 </p>
               </div>
-            ) : null}
+            ) : null} */}
             <div className={styles.superPowerWraper}>
               <img
                 src={eyes}
                 alt="eyes"
+                className={hasUsedEyes ? styles.superPowerUsed : ''}
                 onMouseEnter={openModal}
                 onMouseLeave={closeModal}
                 onClick={() => {
                   if (!useEyes) {
                     habdleAchievementEyesClick();
                     setUseEyes(true);
+                    setHasUsedEyes(true);
                   }
                 }}
               />
               {isModalOpen && <SuperPowerEyes onClose={closeModal} />}
             </div>
             <div className={styles.imageOverlay}>
-              <img src={circle} onMouseEnter={openModalCards} onMouseLeave={closeModalCards} alt="circle" />
+              <img src={circle}  className={hasUsedCard ? styles.cardUsed : ''} onMouseEnter={openModalCards} onMouseLeave={closeModalCards} alt="circle" />
               <img
                 src={car}
                 onMouseEnter={openModalCards}
@@ -386,6 +389,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
                   if (!useCard) {
                     habdleAchievementCardClick();
                     setUseCard(true);
+                    setHasUsedCard(true);
                   }
                 }}
               />
@@ -418,6 +422,13 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
           />
         </div>
       ) : null}
+      {easyMode === true ? (
+              <div>
+                <p className={styles.easyMode}>
+                  Осталось: <span>{isLives} жизни </span>
+                </p>
+              </div>
+            ) : null}
       {status === STATUS_IN_PROGRESS ? (
         <div className={styles.linkButton}>
           <Link to="/">

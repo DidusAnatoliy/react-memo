@@ -73,7 +73,7 @@
 .easyMode {
   font-size: 20px;
   line-height: 30px;
-  display: flex;
+  /* display: flex; */
   color: #fff;
   flex-direction: column;
 }
@@ -146,4 +146,12 @@
 
 .superPowerWraper {
   position: relative;
+}
+
+.superPowerUsed {
+  filter: brightness(50%);
+}
+
+.cardUsed {
+  filter: brightness(50%);
 }

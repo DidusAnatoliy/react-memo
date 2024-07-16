@@ -21,23 +21,22 @@ export function SelectLevelPage() {
           <h1 className={styles.text}>Легкий режим(3 жизни)</h1>
         </div>
         <h1 className={styles.title}>Выбери сложность</h1>
-        <ul className={styles.levels}>
-          <li className={styles.level}>
-            <label className={styles.levelLink} to={`/game/${level}`}>
-              <input type="radio" value={3} onChange={e => setLevel(e.target.value)} className={styles.lableInput} />1
-            </label>
-          </li>
-          <li className={styles.level}>
-            <label className={styles.levelLink} to={`/game/${level}`}>
-              <input type="radio" value={6} onChange={e => setLevel(e.target.value)} className={styles.lableInput} />2
-            </label>
-          </li>
-          <li className={styles.level}>
-            <label className={styles.levelLink} to={`/game/${level}`}>
-              <input type="radio" value={9} onChange={e => setLevel(e.target.value)} className={styles.lableInput} />3
-            </label>
-          </li>
-        </ul>
+        <form className={styles.levels}>
+          <label className={styles.level}>
+            <input type="radio" value="3" checked={level === 3} onChange={e => setLevel(e.target.value)} />
+            <div className={styles.levelText}>1</div>
+          </label>
+          <br />
+          <label className={styles.level}>
+            <input type="radio" value="6" checked={level === 6} onChange={e => setLevel(e.target.value)} />
+            <div className={styles.levelText}>2</div>
+          </label>
+          <br />
+          <label className={styles.level}>
+            <input type="radio" value="9" checked={level === 9} onChange={e => setLevel(e.target.value)} />
+            <div className={styles.levelText}>3</div>
+          </label>
+        </form>
         <Button onClick={handlePlay}>Играть</Button>
         <Link to="/leaderboard">
           <p className={styles.text}>
