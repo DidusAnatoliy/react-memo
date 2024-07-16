@@ -364,7 +364,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
               <img
                 src={eyes}
                 alt="eyes"
-                className={hasUsedEyes ? styles.superPowerUsed : ''}
+                className={hasUsedEyes ? styles.superPowerUsed : ""}
                 onMouseEnter={openModal}
                 onMouseLeave={closeModal}
                 onClick={() => {
@@ -378,7 +378,13 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
               {isModalOpen && <SuperPowerEyes onClose={closeModal} />}
             </div>
             <div className={styles.imageOverlay}>
-              <img src={circle}  className={hasUsedCard ? styles.cardUsed : ''} onMouseEnter={openModalCards} onMouseLeave={closeModalCards} alt="circle" />
+              <img
+                src={circle}
+                className={hasUsedCard ? styles.cardUsed : ""}
+                onMouseEnter={openModalCards}
+                onMouseLeave={closeModalCards}
+                alt="circle"
+              />
               <img
                 src={car}
                 onMouseEnter={openModalCards}
@@ -423,12 +429,12 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
         </div>
       ) : null}
       {easyMode === true ? (
-              <div>
-                <p className={styles.easyMode}>
-                  Осталось: <span>{isLives} жизни </span>
-                </p>
-              </div>
-            ) : null}
+        <div>
+          <p className={styles.easyMode}>
+            Осталось: <span>{isLives} жизни </span>
+          </p>
+        </div>
+      ) : null}
       {status === STATUS_IN_PROGRESS ? (
         <div className={styles.linkButton}>
           <Link to="/">
