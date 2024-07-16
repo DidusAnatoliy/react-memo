@@ -267,11 +267,12 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
     if (status !== STATUS_PAUSE) {
       if (status === STATUS_LOST) return;
       if (status === STATUS_WON) return;
+      const MAX_SECONDS_IN_MINUTE = 59;
       const intervalId = setInterval(() => {
         setTimer(prevTimer => {
           if (prevTimer) {
-            const seconds = prevTimer.seconds === 59 ? 0 : prevTimer.seconds + 1;
-            const minutes = prevTimer.seconds === 59 ? prevTimer.minutes + 1 : prevTimer.minutes;
+            const seconds = prevTimer.seconds === MAX_SECONDS_IN_MINUTE ? 0 : prevTimer.seconds + 1;
+            const minutes = prevTimer.seconds === MAX_SECONDS_IN_MINUTE ? prevTimer.minutes + 1 : prevTimer.minutes;
             return { seconds, minutes };
           }
           return prevTimer;
