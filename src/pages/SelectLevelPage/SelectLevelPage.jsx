@@ -9,7 +9,7 @@ export function SelectLevelPage() {
   const navigate = useNavigate();
   const [selectedDifficulty, setSelectedDifficulty] = useState(level);
 
-  const handleRadioChange = (value) => {
+  const handleRadioChange = value => {
     setSelectedDifficulty(value);
     setLevel(value);
   };
@@ -29,18 +29,48 @@ export function SelectLevelPage() {
         <h1 className={styles.title}>Выбери сложность</h1>
         <ul className={styles.levels}>
           <li className={styles.level}>
-            <label className={`${styles.levelLink} ${selectedDifficulty === 3 ? styles.active : ''}`} to={`/game/${level}`}>
-              <input type="radio" name="difficulty" value={3} onChange={() => handleRadioChange(3)} className={styles.lableInput} />1
+            <label
+              className={`${styles.levelLink} ${selectedDifficulty === 3 ? styles.active : ""}`}
+              to={`/game/${level}`}
+            >
+              <input
+                type="radio"
+                name="difficulty"
+                value={3}
+                onChange={() => handleRadioChange(3)}
+                className={styles.lableInput}
+              />
+              1
             </label>
           </li>
           <li className={styles.level}>
-          <label className={`${styles.levelLink} ${selectedDifficulty === 6 ? styles.active : ''}`} to={`/game/${level}`}>
-          <input type="radio" name="difficulty" value={6} onChange={() => handleRadioChange(6)} className={styles.lableInput} />2
+            <label
+              className={`${styles.levelLink} ${selectedDifficulty === 6 ? styles.active : ""}`}
+              to={`/game/${level}`}
+            >
+              <input
+                type="radio"
+                name="difficulty"
+                value={6}
+                onChange={() => handleRadioChange(6)}
+                className={styles.lableInput}
+              />
+              2
             </label>
           </li>
           <li className={styles.level}>
-          <label className={`${styles.levelLink} ${selectedDifficulty === 9 ? styles.active : ''}`} to={`/game/${level}`}>
-          <input type="radio" name="difficulty" value={9} onChange={() => handleRadioChange(9)} className={styles.lableInput} />3
+            <label
+              className={`${styles.levelLink} ${selectedDifficulty === 9 ? styles.active : ""}`}
+              to={`/game/${level}`}
+            >
+              <input
+                type="radio"
+                name="difficulty"
+                value={9}
+                onChange={() => handleRadioChange(9)}
+                className={styles.lableInput}
+              />
+              3
             </label>
           </li>
         </ul>
