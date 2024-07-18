@@ -5,7 +5,7 @@ import styles from "./Cards.module.css";
 import { EndGameModal } from "../../components/EndGameModal/EndGameModal";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
-import { EasyModeContext } from "../../utils/contextMode";
+import { EasyModeContextAndSp } from "../../utils/contextMode";
 import { Link } from "react-router-dom";
 import eyes from "./images/eyes.png";
 import circle from "./images/circle.png";
@@ -51,7 +51,7 @@ function getTimerValue(startDate, endDate) {
  */
 export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
   // Легкий режим
-  const { easyMode, isLives, setIsLives, setUseEyes, useEyes, useCard, setUseCard } = useContext(EasyModeContext);
+  const { easyMode, isLives, setIsLives, setUseEyes, useEyes, useCard, setUseCard } = useContext(EasyModeContextAndSp);
 
   // В cards лежит игровое поле - массив карт и их состояние открыта\закрыта
   const [cards, setCards] = useState([]);
