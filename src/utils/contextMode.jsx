@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-export const EasyModeContextAndSp = createContext();
+export const GameSettingsContext = createContext();
 
 export function EasyModeProvider({ children }) {
   // Стейт для вкл/выкл достижеений
@@ -26,7 +26,7 @@ export function EasyModeProvider({ children }) {
   };
 
   return (
-    <EasyModeContextAndSp.Provider
+    <GameSettingsContext.Provider
       value={{
         useCard,
         setUseCard,
@@ -47,6 +47,6 @@ export function EasyModeProvider({ children }) {
       }}
     >
       {children}
-    </EasyModeContextAndSp.Provider>
+    </GameSettingsContext.Provider>
   );
 }

@@ -7,7 +7,7 @@ import celebrationImageUrl from "./images/celebration.png";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AddLeader, GetLeader } from "../../Api";
-import { EasyModeContextAndSp } from "../../utils/contextMode";
+import { GameSettingsContext } from "../../utils/contextMode";
 
 export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, onClick }) {
   const [newLeader, setNewLeader] = useState(false);
@@ -15,7 +15,7 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
   const [user, setUser] = useState("");
   const time = gameDurationSeconds + gameDurationMinutes * 60;
   //уровень сложности + список лидеров из апи
-  const { setLeaders, level, easyMode, useEyes, useCard } = useContext(EasyModeContextAndSp);
+  const { setLeaders, level, easyMode, useEyes, useCard } = useContext(GameSettingsContext);
   // if (!user) {
   //   setUser("Пользователь");
   // }

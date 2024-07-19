@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./SelectLevelPage.module.css";
-import { EasyModeContextAndSp } from "../../utils/contextMode";
+import { GameSettingsContext } from "../../utils/contextMode";
 import { useContext, useState } from "react";
 import { Button } from "../../components/Button/Button";
 
 export function SelectLevelPage() {
-  const { toggleMode, level, setLevel } = useContext(EasyModeContextAndSp);
+  const { toggleMode, level, setLevel } = useContext(GameSettingsContext);
   const navigate = useNavigate();
   const [selectedDifficulty, setSelectedDifficulty] = useState(level);
 

@@ -3,11 +3,11 @@ import styles from "./LeaderboardPage.module.css";
 import { Button } from "../../components/Button/Button";
 import { Link } from "react-router-dom";
 import { GetLeader } from "../../Api";
-import { EasyModeContextAndSp } from "../../utils/contextMode";
+import { GameSettingsContext } from "../../utils/contextMode";
 import { imageAchActive, imageAchPassive, imageModeActive, imageModePassive } from "../../utils/achievementsImages";
 
 const LeaderboardPage = () => {
-  const { leaders, setLeaders, useEyes, easyMode, useCard } = useContext(EasyModeContextAndSp);
+  const { leaders, setLeaders, useEyes, easyMode, useCard } = useContext(GameSettingsContext);
   const formatDate = diffInSecconds => {
     const minutes = Math.floor(diffInSecconds / 60);
     const seconds = diffInSecconds % 60;
