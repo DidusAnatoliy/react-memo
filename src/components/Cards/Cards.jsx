@@ -52,7 +52,7 @@ function getTimerValue(startDate, endDate) {
 export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
   // Легкий режим
   const { easyMode, isLives, setIsLives, setUseEyes, useEyes, useCard, setUseCard } = useContext(GameSettingsContext);
-  
+
   // В cards лежит игровое поле - массив карт и их состояние открыта\закрыта
   const [cards, setCards] = useState([]);
   // Текущий статус игры
