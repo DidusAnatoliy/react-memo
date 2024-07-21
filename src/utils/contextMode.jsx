@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 export const GameSettingsContext = createContext();
 
-export function EasyModeProvider({ children }) {
+export function GameSettingsProvider({ children }) {
   // Стейт для вкл/выкл достижеений
   const [useAchievementPaz, setUseAchievementPaz] = useState(false);
   const [useAchievementCir, setUseAchievementCir] = useState(false);
