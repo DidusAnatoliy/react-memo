@@ -1,14 +1,20 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./SelectLevelPage.module.css";
-import { EasyModeContext } from "../../utils/contextMode";
-import { useContext } from "react";
+import { GameSettingsContext } from "../../utils/contextMode";
+import { useContext, useState } from "react";
 import { Button } from "../../components/Button/Button";
 
 export function SelectLevelPage() {
-  const { toggleMode, level, setLevel } = useContext(EasyModeContext);
+  const { toggleMode, level, setLevel } = useContext(GameSettingsContext);
   const navigate = useNavigate();
+  const [selectedDifficulty, setSelectedDifficulty] = useState(level);
+
+  const handleRadioChange = value => {
+    setSelectedDifficulty(value);
+    setLevel(value);
+  };
   const handlePlay = () => {
-    navigate(`/game/${level}`);
+    navigate(`/game/${selectedDifficulty}`);
   };
   return (
     <div className={styles.container}>
@@ -23,18 +29,48 @@ export function SelectLevelPage() {
         <h1 className={styles.title}>Выбери сложность</h1>
         <ul className={styles.levels}>
           <li className={styles.level}>
-            <label className={styles.levelLink} to={`/game/${level}`}>
-              <input type="radio" value={3} onChange={e => setLevel(e.target.value)} className={styles.lableInput} />1
+            <label
+              className={`${styles.levelLink} ${selectedDifficulty === 3 ? styles.active : ""}`}
+              to={`/game/${level}`}
+            >
+              <input
+                type="radio"
+                name="difficulty"
+                value={3}
+                onChange={() => handleRadioChange(3)}
+                className={styles.lableInput}
+              />
+              1
             </label>
           </li>
           <li className={styles.level}>
-            <label className={styles.levelLink} to={`/game/${level}`}>
-              <input type="radio" value={6} onChange={e => setLevel(e.target.value)} className={styles.lableInput} />2
+            <label
+              className={`${styles.levelLink} ${selectedDifficulty === 6 ? styles.active : ""}`}
+              to={`/game/${level}`}
+            >
+              <input
+                type="radio"
+                name="difficulty"
+                value={6}
+                onChange={() => handleRadioChange(6)}
+                className={styles.lableInput}
+              />
+              2
             </label>
           </li>
           <li className={styles.level}>
-            <label className={styles.levelLink} to={`/game/${level}`}>
-              <input type="radio" value={9} onChange={e => setLevel(e.target.value)} className={styles.lableInput} />3
+            <label
+              className={`${styles.levelLink} ${selectedDifficulty === 9 ? styles.active : ""}`}
+              to={`/game/${level}`}
+            >
+              <input
+                type="radio"
+                name="difficulty"
+                value={9}
+                onChange={() => handleRadioChange(9)}
+                className={styles.lableInput}
+              />
+              3
             </label>
           </li>
         </ul>
